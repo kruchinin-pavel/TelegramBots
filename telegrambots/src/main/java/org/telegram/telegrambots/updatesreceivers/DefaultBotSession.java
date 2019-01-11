@@ -3,6 +3,7 @@ package org.telegram.telegrambots.updatesreceivers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import org.apache.http.HttpEntity;
+import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -260,6 +261,8 @@ public class DefaultBotSession implements BotSession {
                         BotLogger.severe(responseContent, LOGTAG, e);
                     }
                 }
+            } catch (NoHttpResponseException e) {
+                // nothing to do - it's just due timeouts
             } catch (SocketException | InvalidObjectException | TelegramApiRequestException e) {
                 BotLogger.severe(LOGTAG, e);
             } catch (SocketTimeoutException e) {
