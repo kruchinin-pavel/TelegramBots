@@ -261,9 +261,10 @@ public class DefaultBotSession implements BotSession {
                         BotLogger.severe(responseContent, LOGTAG, e);
                     }
                 }
-            } catch (NoHttpResponseException e) {
+            } catch (NoHttpResponseException | SocketException e) {
                 // nothing to do - it's just due timeouts
-            } catch (SocketException | InvalidObjectException | TelegramApiRequestException e) {
+                BotLogger.warn(LOGTAG, "Ignored: " + e.getMessage());
+            } catch (InvalidObjectException | TelegramApiRequestException e) {
                 BotLogger.severe(LOGTAG, e);
             } catch (SocketTimeoutException e) {
                 BotLogger.fine(LOGTAG, e);
