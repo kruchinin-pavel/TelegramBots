@@ -116,7 +116,7 @@ public class GetUpdates extends BotApiMethod<ArrayList<Update>>{
             if (result.getOk()) {
                 return result.getResult();
             } else {
-                throw new TelegramApiRequestException("Error getting updates", result);
+                throw new TelegramApiRequestException("Error getting updates: " + result, result);
             }
         } catch (IOException e) {
             throw new TelegramApiRequestException("Unable to deserialize response", e);

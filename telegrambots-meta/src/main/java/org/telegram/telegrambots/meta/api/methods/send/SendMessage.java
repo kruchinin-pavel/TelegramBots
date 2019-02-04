@@ -167,7 +167,7 @@ public class SendMessage extends BotApiMethod<Message> {
             if (result.getOk()) {
                 return result.getResult();
             } else {
-                throw new TelegramApiRequestException("Error sending message", result);
+                throw new TelegramApiRequestException("Error sending message: " + result, result);
             }
         } catch (IOException e) {
             throw new TelegramApiRequestException("Unable to deserialize response", e);
