@@ -22,6 +22,7 @@ import org.telegram.telegrambots.facilities.TelegramHttpClientBuilder;
 import org.telegram.telegrambots.meta.generics.*;
 import org.telegram.telegrambots.meta.logging.BotLogger;
 
+import javax.net.ssl.SSLProtocolException;
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.net.SocketException;
@@ -261,7 +262,7 @@ public class DefaultBotSession implements BotSession {
                         BotLogger.severe(responseContent, LOGTAG, e);
                     }
                 }
-            } catch (NoHttpResponseException | SocketException e) {
+            } catch (NoHttpResponseException | SSLProtocolException | SocketException e){
                 // nothing to do - it's just due timeouts
                 BotLogger.warn(LOGTAG, "Ignored: " + e.getMessage());
             } catch (InvalidObjectException | TelegramApiRequestException e) {
